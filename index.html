@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <title>Form Validation</title>
+</head>
+<body>
+    <h4>Let's have a Dropdown Validation</h4>
+
+    <form id="myForm" onsubmit="return onSubmit();">
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname" pattern="[A-Za-z]+" required><br>
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lname" pattern="[A-Za-z]+" required><br>
+        <br>
+
+        <label for="school">Select your School: </label>
+        <select name="school" id="school" required>
+            <option value="School of computer engineering and technology">School of computer engineering and technology</option>
+            <option value="School of MBA">School of MBA</option>
+            <option value="School of BBA">School of BBA</option>
+            <option value="School of BCA">School of BCA</option>
+            <option value="School of BA LLB">School of BA LLB</option>
+        </select>
+        <br><br>
+        <label for="phoneNumber">Contact Number: </label>
+        <input type="tel" id="phone" name="phoneNumber" pattern="[0-9]{10}" required><br><br>
+
+        <label for="email">Enter Email Address</label><br>
+        <input type="email" name="email" id="email" required><br><br>
+
+        <label for="state">Select State: </label>
+        <select name="state" id="state" required>
+            <option value="">Select state</option>
+            <option value="AN">Andaman and Nicobar Islands</option>
+            <option value="AP">Andhra Pradesh</option>
+            <option value="AR">Arunachal Pradesh</option>
+            <option value="AS">Assam</option>
+            <option value="BR">Bihar</option>
+            <option value="CH">Chandigarh</option>
+            <option value="CT">Chhattisgarh</option>
+            <option value="DN">Dadra and Nagar Haveli</option>
+            <option value="DD">Daman and Diu</option>
+            <option value="DL">Delhi</option>
+            <option value="GA">Goa</option>
+            <option value="GJ">Gujarat</option>
+            <option value="HR">Haryana</option>
+            <option value="HP">Himachal Pradesh</option>
+            <option value="JK">Jammu and Kashmir</option>
+            <option value="JH">Jharkhand</option>
+            <option value="KA">Karnataka</option>
+            <option value="KL">Kerala</option>
+            <option value="LA">Ladakh</option>
+            <option value="LD">Lakshadweep</option>
+            <option value="MP">Madhya Pradesh</option>
+            <option value="MH">Maharashtra</option>
+            <option value="MN">Manipur</option>
+            <option value="ML">Meghalaya</option>
+            <option value="MZ">Mizoram</option>
+            <option value="NL">Nagaland</option>
+            <option value="OR">Odisha</option>
+            <option value="PY">Puducherry</option>
+            <option value="PB">Punjab</option>
+            <option value="RJ">Rajasthan</option>
+            <option value="SK">Sikkim</option>
+            <option value="TN">Tamil Nadu</option>
+            <option value="TG">Telangana</option>
+            <option value="TR">Tripura</option>
+            <option value="UP">Uttar Pradesh</option>
+            <option value="UT">Uttarakhand</option>
+            <option value="WB">West Bengal</option>
+        </select>
+        <br><br>
+        <label for="city">Select City: </label>
+        <select id="city" name="city" class="form-select" required>
+            <option value="" selected disabled>Select a City</option>
+            <!-- City options will be populated using JavaScript -->
+        </select>
+        <br><br>
+        <label for="country">Country: </label><br>
+        <input id="country" type="text" pattern="[A-Za-z]+" required><br><br>
+        <button id="btn" type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Define a function to get cities for a given state
+        function getCitiesForState(state) {
+            const cityData = {
+                'AN': ['Port Blair', 'Havelock'],
+                'AP': ['Hyderabad', 'Visakhapatnam'],
+                'AR': ['Itanagar', 'Naharlagun'],
+                'AS': ['Guwahati', 'Dibrugarh'],
+                'BR': ['Patna', 'Gaya'],
+                'CH': ['Chandigarh', 'Panchkula'],
+                'CT': ['Raipur', 'Bhilai'],
+                'DN': ['Silvassa', 'Daman'],
+                'DD': ['Diu', 'Daman'],
+                'DL': ['New Delhi', 'Noida'],
+                'GA': ['Panaji', 'Margao'],
+                'GJ': ['Ahmedabad', 'Surat'],
+                'HR': ['Chandigarh', 'Gurugram'],
+                'HP': ['Shimla', 'Manali'],
+                'JK': ['Srinagar', 'Jammu'],
+                'JH': ['Ranchi', 'Jamshedpur'],
+                'KA': ['Bengaluru', 'Mysuru'],
+                'KL': ['Thiruvananthapuram', 'Kochi'],
+                'LA': ['Leh', 'Kargil'],
+                'LD': ['Kavaratti', 'Agatti'],
+                'MP': ['Bhopal', 'Indore'],
+                'MH': ['Bombay', 'Pune'],
+                'MN': ['Imphal', 'Thoubal'],
+                'ML': ['Shillong', 'Tura'],
+                'MZ': ['Aizawl', 'Lunglei'],
+                'NL': ['Kohima', 'Dimapur'],
+                'OR': ['Bhubaneswar', 'Cuttack'],
+                'PY': ['Puducherry', 'Karaikal'],
+                'PB': ['Chandigarh', 'Amritsar'],
+                'RJ': ['Jaipur', 'Jodhpur'],
+                'SK': ['Gangtok', 'Namchi'],
+                'TN': ['Chennai', 'Coimbatore'],
+                'TG': ['Hyderabad', 'Warangal'],
+                'TR': ['Agartala', 'Udaipur'],
+                'UP': ['Lucknow', 'Kanpur'],
+                'UT': ['Dehradun', 'Haridwar'],
+                'WB': ['Kolkata', 'Howrah']
+            };
+
+            return cityData[state] || [];
+        }
+
+        function populateCities() {
+            const stateSelect = document.getElementById('state');
+            const citySelect = document.getElementById('city');
+            citySelect.innerHTML = ''; // Clear the current city options
+
+            const selectedState = stateSelect.value;
+            const cities = getCitiesForState(selectedState);
+
+            // Add the default "Select a City" option
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Select a City';
+            citySelect.appendChild(defaultOption);
+
+            // Populate the city dropdown with options
+            cities.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.textContent = city;
+                citySelect.appendChild(option);
+            });
+        }
+
+        function onSubmit() {
+            const fname = document.getElementById('fname').value;
+            const lname = document.getElementById('lname').value;
+            const school = document.getElementById('school').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const state = document.getElementById('state').value;
+            const city = document.getElementById('city').value;
+            const country = document.getElementById('country').value;
+
+            if (!isValidName(fname) || !isValidName(lname)) {
+                alert('First name and last name should contain letters only.');
+                return false;
+            }
+
+            if (!isValidPhoneNumber(phone)) {
+                alert('Contact number should contain 10 digits (numbers only).');
+                return false;
+            }
+
+            if (!isValidCountry(country)) {
+                alert('Country should contain letters only.');
+                return false;
+            }
+
+            // Rest of your validation logic
+
+            alert('Form submitted successfully!');
+            return true; // Form will be submitted
+        }
+
+        function isValidName(name) {
+            const nameRegex = /^[A-Za-z]+$/;
+            return nameRegex.test(name);
+        }
+
+        function isValidPhoneNumber(phone) {
+            const phoneRegex = /^[0-9]{10}$/;
+            return phoneRegex.test(phone);
+        }
+
+        function isValidCountry(country) {
+            const countryRegex = /^[A-Za-z]+$/;
+            return countryRegex.test(country);
+        }
+
+        // Attach an event listener to the state dropdown to populate the cities when the state changes
+        document.getElementById('state').addEventListener('change', populateCities);
+
+        // Initialize the city dropdown with the "Select a City" option
+        populateCities();
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <title>Form Validation</title>
+</head>
+<body>
+    <h4>Let's have a Dropdown Validation</h4>
+
+    <form id="myForm" onsubmit="return onSubmit();">
+        <label for="fname">First name:</label><br>
+        <input type="text" id="fname" name="fname" pattern="[A-Za-z]+" required><br>
+        <label for="lname">Last name:</label><br>
+        <input type="text" id="lname" name="lname" pattern="[A-Za-z]+" required><br>
+        <br>
+
+        <label for="school">Select your School: </label>
+        <select name="school" id="school" required>
+            <option value="School of computer engineering and technology">School of computer engineering and technology</option>
+            <option value="School of MBA">School of MBA</option>
+            <option value="School of BBA">School of BBA</option>
+            <option value="School of BCA">School of BCA</option>
+            <option value="School of BA LLB">School of BA LLB</option>
+        </select>
+        <br><br>
+        <label for="phoneNumber">Contact Number: </label>
+        <input type="tel" id="phone" name="phoneNumber" pattern="[0-9]{10}" required><br><br>
+
+        <label for="email">Enter Email Address</label><br>
+        <input type="email" name="email" id="email" required><br><br>
+
+        <label for="state">Select State: </label>
+        <select name="state" id="state" required>
+            <option value="">Select state</option>
+            <option value="AN">Andaman and Nicobar Islands</option>
+            <option value="AP">Andhra Pradesh</option>
+            <option value="AR">Arunachal Pradesh</option>
+            <option value="AS">Assam</option>
+            <option value="BR">Bihar</option>
+            <option value="CH">Chandigarh</option>
+            <option value="CT">Chhattisgarh</option>
+            <option value="DN">Dadra and Nagar Haveli</option>
+            <option value="DD">Daman and Diu</option>
+            <option value="DL">Delhi</option>
+            <option value="GA">Goa</option>
+            <option value="GJ">Gujarat</option>
+            <option value="HR">Haryana</option>
+            <option value="HP">Himachal Pradesh</option>
+            <option value="JK">Jammu and Kashmir</option>
+            <option value="JH">Jharkhand</option>
+            <option value="KA">Karnataka</option>
+            <option value="KL">Kerala</option>
+            <option value="LA">Ladakh</option>
+            <option value="LD">Lakshadweep</option>
+            <option value="MP">Madhya Pradesh</option>
+            <option value="MH">Maharashtra</option>
+            <option value="MN">Manipur</option>
+            <option value="ML">Meghalaya</option>
+            <option value="MZ">Mizoram</option>
+            <option value="NL">Nagaland</option>
+            <option value="OR">Odisha</option>
+            <option value="PY">Puducherry</option>
+            <option value="PB">Punjab</option>
+            <option value="RJ">Rajasthan</option>
+            <option value="SK">Sikkim</option>
+            <option value="TN">Tamil Nadu</option>
+            <option value="TG">Telangana</option>
+            <option value="TR">Tripura</option>
+            <option value="UP">Uttar Pradesh</option>
+            <option value="UT">Uttarakhand</option>
+            <option value="WB">West Bengal</option>
+        </select>
+        <br><br>
+        <label for="city">Select City: </label>
+        <select id="city" name="city" class="form-select" required>
+            <option value="" selected disabled>Select a City</option>
+            <!-- City options will be populated using JavaScript -->
+        </select>
+        <br><br>
+        <label for="country">Country: </label><br>
+        <input id="country" type="text" pattern="[A-Za-z]+" required><br><br>
+        <button id="btn" type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Define a function to get cities for a given state
+        function getCitiesForState(state) {
+            const cityData = {
+                'AN': ['Port Blair', 'Havelock'],
+                'AP': ['Hyderabad', 'Visakhapatnam'],
+                'AR': ['Itanagar', 'Naharlagun'],
+                'AS': ['Guwahati', 'Dibrugarh'],
+                'BR': ['Patna', 'Gaya'],
+                'CH': ['Chandigarh', 'Panchkula'],
+                'CT': ['Raipur', 'Bhilai'],
+                'DN': ['Silvassa', 'Daman'],
+                'DD': ['Diu', 'Daman'],
+                'DL': ['New Delhi', 'Noida'],
+                'GA': ['Panaji', 'Margao'],
+                'GJ': ['Ahmedabad', 'Surat'],
+                'HR': ['Chandigarh', 'Gurugram'],
+                'HP': ['Shimla', 'Manali'],
+                'JK': ['Srinagar', 'Jammu'],
+                'JH': ['Ranchi', 'Jamshedpur'],
+                'KA': ['Bengaluru', 'Mysuru'],
+                'KL': ['Thiruvananthapuram', 'Kochi'],
+                'LA': ['Leh', 'Kargil'],
+                'LD': ['Kavaratti', 'Agatti'],
+                'MP': ['Bhopal', 'Indore'],
+                'MH': ['Mumbai', 'Pune'],
+                'MN': ['Imphal', 'Thoubal'],
+                'ML': ['Shillong', 'Tura'],
+                'MZ': ['Aizawl', 'Lunglei'],
+                'NL': ['Kohima', 'Dimapur'],
+                'OR': ['Bhubaneswar', 'Cuttack'],
+                'PY': ['Puducherry', 'Karaikal'],
+                'PB': ['Chandigarh', 'Amritsar'],
+                'RJ': ['Jaipur', 'Jodhpur'],
+                'SK': ['Gangtok', 'Namchi'],
+                'TN': ['Chennai', 'Coimbatore'],
+                'TG': ['Hyderabad', 'Warangal'],
+                'TR': ['Agartala', 'Udaipur'],
+                'UP': ['Lucknow', 'Kanpur'],
+                'UT': ['Dehradun', 'Haridwar'],
+                'WB': ['Kolkata', 'Howrah']
+            };
+
+            return cityData[state] || [];
+        }
+
+        function populateCities() {
+            const stateSelect = document.getElementById('state');
+            const citySelect = document.getElementById('city');
+            citySelect.innerHTML = ''; // Clear the current city options
+
+            const selectedState = stateSelect.value;
+            const cities = getCitiesForState(selectedState);
+
+            // Add the default "Select a City" option
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Select a City';
+            citySelect.appendChild(defaultOption);
+
+            // Populate the city dropdown with options
+            cities.forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.textContent = city;
+                citySelect.appendChild(option);
+            });
+        }
+
+        function onSubmit() {
+            const fname = document.getElementById('fname').value;
+            const lname = document.getElementById('lname').value;
+            const school = document.getElementById('school').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const state = document.getElementById('state').value;
+            const city = document.getElementById('city').value;
+            const country = document.getElementById('country').value;
+
+            if (!isValidName(fname) || !isValidName(lname)) {
+                alert('First name and last name should contain letters only.');
+                return false;
+            }
+
+            if (!isValidPhoneNumber(phone)) {
+                alert('Contact number should contain 10 digits (numbers only).');
+                return false;
+            }
+
+            if (!isValidCountry(country)) {
+                alert('Country should contain letters only.');
+                return false;
+            }
+
+            // Rest of your validation logic
+
+            alert('Form submitted successfully!');
+            return true; // Form will be submitted
+        }
+
+        function isValidName(name) {
+            const nameRegex = /^[A-Za-z]+$/;
+            return nameRegex.test(name);
+        }
+
+        function isValidPhoneNumber(phone) {
+            const phoneRegex = /^[0-9]{10}$/;
+            return phoneRegex.test(phone);
+        }
+
+        function isValidCountry(country) {
+            const countryRegex = /^[A-Za-z]+$/;
+            return countryRegex.test(country);
+        }
+
+        // Attach an event listener to the state dropdown to populate the cities when the state changes
+        document.getElementById('state').addEventListener('change', populateCities);
+
+        // Initialize the city dropdown with the "Select a City" option
+        populateCities();
+    </script>
+</body>
+</html>
